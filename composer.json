@@ -1,22 +1,39 @@
 {
-  "repositories": [{
-    "type": "composer",
-    "url": "https://packagist.org"
-  }],
-  "name": "minusmillionaer/swiftmailer-postal",
+  "name": "netzfabrik/swiftmailer-postal",
+  "type": "library",
   "description": "Swiftmailer Transport for Postal",
+  "keywords": [
+    "GiulianoSchindler",
+    "Netzfabrik",
+    "Php",
+    "Heja",
+    "Xml",
+    "Swiftmailer",
+    "Postal"
+  ],
+  "homepage": "https://github.com/minusmillionaer/swiftmailer-postal",
+  "authors": [
+    {
+      "name": "Giuliano Schindler",
+      "email": "giuliano.schindler@netzfabrik.com",
+      "homepage": "https://netzfabrik.com",
+      "role": "Developer"
+    }
+  ],
   "require": {
     "postal/postal": "^v1.0"
   },
   "autoload": {
-    "psr-0": {
-      "NETZFABRIK\\Mail\\Postal\\": "src/"
+    "psr-4": {
+      "NETZFABRIK\\Mail\\Postal\\": "src"
     }
   },
-  "suggest": {
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
   },
-  "authors": [{
-    "name": "Giuliano Schindler",
-    "email": "giuliano.schindler@netzfabrik.com"
-  }]
+  "config": {
+    "sort-packages": true
+  }
 }
