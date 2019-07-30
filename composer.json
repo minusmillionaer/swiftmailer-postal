@@ -1,0 +1,22 @@
+{
+    "repositories": [{
+        "type": "composer",
+        "url": "https://packagist.org"
+    }],
+    "name": "minusmillionaer/swiftmailer-postal",
+    "description": "Swiftmailer Transport for Postal",
+    "require": {
+        "postal/postal": "^v1.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "NETZFABRIK\Mail\Postal\": "src/"
+        }
+    },
+    "suggest": {
+    },
+    "authors": [{
+        "name": "Giuliano Schindler",
+        "email": "giuliano.schindler@netzfabrik.com"
+    }]
+}
