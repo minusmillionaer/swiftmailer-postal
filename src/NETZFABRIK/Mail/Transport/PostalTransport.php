@@ -1,6 +1,6 @@
 <?php
 
-namespace NETZFABRIK\Mail\Postal;
+namespace NETZFABRIK\Mail\Transport;
 
 use \Swift_Events_EventListener;
 use \Swift_Mime_MimePart;
@@ -8,14 +8,14 @@ use \Swift_Mime_SimpleMessage;
 use \Swift_Transport;
 
 
-class Transport implements Swift_Transport {
+class PostalTransport implements Swift_Transport {
 
     /**
 	 * The Postal API key.
 	 *
 	 * @var string
 	 */
-    protected $apiKey;
+    protected $key;
 
     /**
 	 * The Postal endpoint.
@@ -39,9 +39,9 @@ class Transport implements Swift_Transport {
 	 * @param  string  $serverToken The API token for the server from which you will send mail.
 	 * @return void
 	 */
-	public function __construct($endpoint, $apiKey) {
+	public function __construct($endpoint, $key) {
 		$this->endpoint = $endpoint;
-		$this->apiKey = $apiKey;
+		$this->key = $key;
 		$this->_eventDispatcher = \Swift_DependencyContainer::getInstance()->lookup('transport.eventdispatcher');
     }
     
@@ -157,8 +157,8 @@ class Transport implements Swift_Transport {
 	 *
 	 * @return string
 	 */
-	public function getApiKey() {
-		return $this->apiKey;
+	public function getKey() {
+		return $this->key;
     }
     
     /**
@@ -166,8 +166,8 @@ class Transport implements Swift_Transport {
 	 *
 	 * @return string
 	 */
-	public function getServerUrl() {
-		return $this->serverUrl;
+	public function getEndpoint() {
+		return $this->endpoint;
     }
     
     /**
@@ -176,8 +176,8 @@ class Transport implements Swift_Transport {
 	 * @param  string  $serverToken
 	 * @return void
 	 */
-	public function setApiKey($apiKey) {
-		return $this->apiKey = $apiKey;
+	public function setKey($key) {
+		return $this->key = $key;
     }
     
     /**
@@ -186,8 +186,8 @@ class Transport implements Swift_Transport {
 	 * @param  string  $serverToken
 	 * @return void
 	 */
-	public function setServerUrl($serverUrl) {
-		return $this->serverUrl = $serverUrl;
+	public function setEndpoint($endpoint) {
+		return $this->endpoint = $endpoint;
 	}
 
 }
