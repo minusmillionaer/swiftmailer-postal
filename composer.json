@@ -10,7 +10,7 @@
     },
     "autoload": {
         "psr-0": {
-            "NETZFABRIK\Mail\Postal\": "src/"
+            "NETZFABRIK\\Mail\\Postal\\": "src/"
         }
     },
     "suggest": {
