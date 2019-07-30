@@ -18,11 +18,11 @@ class Transport implements Swift_Transport {
     protected $apiKey;
 
     /**
-	 * The Postal Server url.
+	 * The Postal endpoint.
 	 *
 	 * @var string
 	 */
-    protected $serverUrl;
+    protected $endpoint;
     
 
     /**
@@ -39,8 +39,8 @@ class Transport implements Swift_Transport {
 	 * @param  string  $serverToken The API token for the server from which you will send mail.
 	 * @return void
 	 */
-	public function __construct($serverUrl, $apiKey) {
-		$this->serverUrl = $serverUrl;
+	public function __construct($endpoint, $apiKey) {
+		$this->endpoint = $endpoint;
 		$this->apiKey = $apiKey;
 		$this->_eventDispatcher = \Swift_DependencyContainer::getInstance()->lookup('transport.eventdispatcher');
     }
@@ -117,16 +117,15 @@ class Transport implements Swift_Transport {
             $resultStatus = Swift_Events_SendEvent::RESULT_FAILED;
         }
 
-		$success = $response->getStatusCode() === 200;
 		if ($responseEvent = $this->_eventDispatcher->createResponseEvent($this, $response->getBody()->getContents(), $success)) {
 			$this->_eventDispatcher->dispatchEvent($responseEvent, 'responseReceived');
 		}
 		if ($sendEvent) {
-			$sendEvent->setResult($success ? \Swift_Events_SendEvent::RESULT_SUCCESS : \Swift_Events_SendEvent::RESULT_FAILED);
+			$sendEvent->setResult($postalResult ? \Swift_Events_SendEvent::RESULT_SUCCESS : \Swift_Events_SendEvent::RESULT_FAILED);
 			$this->_eventDispatcher->dispatchEvent($sendEvent, 'sendPerformed');
 		}
 		
-		return $success
+		return $postalResult
 			? $this->getRecipientCount($message)
 			: 0;
     }
